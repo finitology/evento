@@ -127,22 +127,26 @@ make build
 
 ---
 
-## 🛠️ Project Structure (Planned)
+## 🧱 Project Structure
 
 ```
 evento/
-├── cmd/                # Main application entrypoints
-│   └── server/         # HTTP server main
-├── internal/           # Private application packages
-│   ├── api/            # JSON-RPC method handlers
-│   ├── indexer/        # Blockchain polling logic
-│   ├── storage/        # Postgres repositories
-│   ├── transport/      # Webhook/Kafka/SQS
-│   └── contracts/      # ABI parsing, deployment info
-├── pkg/                # Reusable Go packages (optional)
-├── scripts/            # DevOps scripts (DB, mocks, etc)
-├── Dockerfile          # Multi-stage build
-├── docker-compose.yml  # For local development
+├── cmd/evento/            # Main app entrypoint (main.go)
+├── internal/
+│   ├── api/               # JSON-RPC method handlers (health, subscribe)
+│   ├── blockchain/        # Poller + Event fetcher
+│   ├── contracts/         # ABI parsing, event signature indexing
+│   ├── delivery/          # Webhook transport (future: Kafka/SQS)
+│   ├── storage/           # Postgres, Redis adapters
+│   ├── model/             # Shared structs (Contract, EventLog, etc.)
+│   └── core/              # Business logic orchestration
+├── migrations/            # SQL schema migrations
+├── pkg/                   # Utility packages, if needed
+├── go.mod
+├── go.sum
+├── .env.example           # Sample env config
+├── .gitignore
+├── LICENSE
 ├── Makefile
 └── README.md
 ```
